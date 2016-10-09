@@ -1,0 +1,18 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Name Finder</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+
+<div th:if="${namesList != null}">
+    <h1>Result</h1>
+    <ul>
+        <li th:each="item : ${namesList}" th:text="${item}">Item description here...</li>
+    </ul>
+</div>
+<a href="/">Back</a>
+
+</body>
+</html>

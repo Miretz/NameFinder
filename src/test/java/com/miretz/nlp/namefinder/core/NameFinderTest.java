@@ -1,6 +1,6 @@
-package com.miretz.nlp.namefinder;
+package com.miretz.nlp.namefinder.core;
 
-import opennlp.tools.util.Span;
+import com.miretz.nlp.namefinder.core.NameFinder;
 import org.junit.Test;
 
 import java.util.Arrays;

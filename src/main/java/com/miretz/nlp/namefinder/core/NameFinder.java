@@ -1,4 +1,4 @@
-package com.miretz.nlp.namefinder;
+package com.miretz.nlp.namefinder.core;
 
 import opennlp.tools.namefind.NameFinderME;
 import opennlp.tools.namefind.TokenNameFinderModel;
@@ -10,7 +10,6 @@ import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -18,8 +17,6 @@ import java.util.List;
  * Created by Miretz on 6.10.2016.
  */
 public class NameFinder {
-
-    public static final Logger log = LoggerFactory.getLogger(NameFinder.class);
 
     private TokenNameFinderModel model;
     private NameFinderME finder;
