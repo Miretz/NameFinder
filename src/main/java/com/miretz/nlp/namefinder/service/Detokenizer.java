@@ -1,4 +1,4 @@
-package com.miretz.nlp.namefinder.core;
+package com.miretz.nlp.namefinder.service;
 
 import java.util.ArrayList;
 import java.util.Arrays;

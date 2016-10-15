@@ -1,4 +1,4 @@
-package com.miretz.nlp.namefinder.core;
+package com.miretz.nlp.namefinder.service;
 
 import opennlp.tools.namefind.NameFinderME;
 import opennlp.tools.namefind.TokenNameFinderModel;
@@ -7,6 +7,7 @@ import opennlp.tools.tokenize.Tokenizer;
 import opennlp.tools.util.Span;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 
 import java.io.File;
 import java.io.IOException;
@@ -16,24 +17,30 @@ import java.util.List;
 /**
  * Created by Miretz on 6.10.2016.
  */
-public class NameFinder {
+
+@Component
+public class NameFinderImpl implements NameFinder {
+
+    public static final Logger log = LoggerFactory.getLogger(NameFinderImpl.class);
 
     private TokenNameFinderModel model;
     private NameFinderME finder;
     private Tokenizer tokenizer;
 
-    public NameFinder() throws IOException {
+    public NameFinderImpl() {
 
         // Load the model file downloaded from OpenNLP
         // http://opennlp.sourceforge.net/models-1.5/en-ner-person.bin
-        model = new TokenNameFinderModel(new File("input/en-ner-person.bin"));
-
-        // Create a NameFinder using the model
-        finder = new NameFinderME(model);
-
-        tokenizer = SimpleTokenizer.INSTANCE;
+        try {
+            model = new TokenNameFinderModel(new File("input/en-ner-person.bin"));
+            finder = new NameFinderME(model);
+            tokenizer = SimpleTokenizer.INSTANCE;
+        } catch (IOException e) {
+            log.error("Could not load model file", e);
+        }
     }
 
+    @Override
     public List<String> getNames(final String sentence) {
 
         // Split the sentence into tokens
@@ -45,6 +52,7 @@ public class NameFinder {
         return Arrays.asList(Span.spansToStrings(nameSpans, tokens));
     }
 
+    @Override
     public String replaceNamesWith(final String sentence, final String placeholder) {
 
         // Split the sentence into tokens

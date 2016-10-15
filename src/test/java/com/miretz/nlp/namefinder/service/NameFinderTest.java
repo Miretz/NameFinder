@@ -1,6 +1,5 @@
-package com.miretz.nlp.namefinder.core;
+package com.miretz.nlp.namefinder.service;
 
-import com.miretz.nlp.namefinder.core.NameFinder;
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -26,7 +25,7 @@ public class NameFinderTest {
 
         String[] expected = {"John Lennon", "Paul McCartney", "George Harrison", "Ringo Starr"};
 
-        NameFinder nameFinder = new NameFinder();
+        NameFinder nameFinder = new NameFinderImpl();
 
         List<String> actual = nameFinder.getNames(sentence);
 
@@ -39,7 +38,7 @@ public class NameFinderTest {
         String sentence = "With members John Lennon, Paul McCartney, George Harrison and Ringo Starr, they became widely regarded as the foremost and most influential act of the rock era.";
         String expected = "With members **** , **** , **** and **** , they became widely regarded as the foremost and most influential act of the rock era.";
 
-        NameFinder nameFinder = new NameFinder();
+        NameFinder nameFinder = new NameFinderImpl();
 
         String actual = nameFinder.replaceNamesWith(sentence, "****");
 
