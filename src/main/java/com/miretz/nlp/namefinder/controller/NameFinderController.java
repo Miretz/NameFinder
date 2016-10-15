@@ -1,5 +1,6 @@
 package com.miretz.nlp.namefinder.controller;
 
+import com.miretz.nlp.namefinder.dto.Replacement;
 import com.miretz.nlp.namefinder.service.NameFinder;
 import com.miretz.nlp.namefinder.dto.Extraction;
 import com.miretz.nlp.namefinder.service.NameFinderImpl;
@@ -37,6 +38,21 @@ public class NameFinderController {
         List<String> extractedNames = nameFinder.getNames(extraction.getSentence());
         extraction.setExtractedNames(extractedNames);
         return extraction;
+
+    }
+
+    @RequestMapping(value = "/names/replaced", method = RequestMethod.POST, produces = "application/json")
+    @ApiOperation(value = "names replacement", nickname = "names replacement")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Success", response = Replacement.class),
+            @ApiResponse(code = 401, message = "Unauthorized"),
+            @ApiResponse(code = 403, message = "Forbidden"),
+            @ApiResponse(code = 404, message = "Not Found"),
+            @ApiResponse(code = 500, message = "Failure")})
+    public Replacement replaceNames(@ApiParam(value = "Replacement request", required = true) @RequestBody Replacement replacement) {
+        String outputSentence = nameFinder.replaceNamesWith(replacement.getInputSentence(), replacement.getReplacement());
+        replacement.setOutputSentence(outputSentence);
+        return replacement;
 
     }
 }
