@@ -22,7 +22,6 @@ http://localhost:8080/swagger-ui.html
 ```
 
 TODO:
-* Wrap as a web application (Spring-boot?)
-* Expose as a ReST service (JAX-RS?)
+* Improve entity extraction
 * Integrate an OCR library (OpenCV, Tesseract, ...)
 * Akka for parallelization 
